@@ -1,0 +1,26 @@
+name: SHEINVERSE MEN Watcher
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"   # har 10 minute
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: |
+        pip install requests beautifulsoup4
+
+    - name: Run script
+      run: |
+        python sheinverse_men.py
